@@ -153,7 +153,7 @@ handlers.addMatch = function (args){
     }
 
     server.SetTitleData(titleData);
-    console.log("The server pushed a new match data to the match list");
+    log.debug("The server pushed a new match data to the match list");
 }
 
 handlers.addBet = function(args){

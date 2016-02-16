@@ -83,7 +83,7 @@ function initializePlayerWorth(currentPlayerIds){
 
     log.debug(playerTicketRequest);
 
-    var playerTicket = playerTicketRequest.data.Data.weeklyTicket;
+    var playerTicket = playerTicketRequest.Data["weeklyTicket"];
 
     var updatePlayerWorth = {
         PlayFabId : currentPlayerIds,
@@ -97,6 +97,10 @@ function initializePlayerWorth(currentPlayerIds){
     sever.UpdateUserData(updatePlayerWorth);
 
     log.debug("Set user worth at initial creation");
+}
+
+handlers.initPlayerTicketAndPoint = function(args){
+    initializePlayerWorth(currentPlayerId);
 }
 
 handlers.addMatch = function (args){
@@ -118,7 +122,7 @@ handlers.addMatch = function (args){
 
     log.debug(matchTitleData);
 
-    var matchData = matchTitleData.data.Data["matchData"];
+    var matchData = matchTitleData.Data["matchData"];
     matchData.push(matchInfo);
 
     log.debug(matchData);
@@ -131,7 +135,7 @@ handlers.addBet = function(args){
     }
 
     var matchDataRequest = server.GetTitleData(matchKey);
-    var matchData = matchDataRequest.data.Data["matchData"];
+    var matchData = matchDataRequest.Data["matchData"];
     log.debug(matchData);
 
     //if(1==1){

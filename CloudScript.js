@@ -47,8 +47,11 @@ handlers.helloWorld = function (args) {
     return { messageValue: message };
 }
 
-// This function is used for updating client info that is read-only
+//////////////////////////////////////////////////////////////
+//-- this is the custom made for the needs of OneTwo apps --//
+//////////////////////////////////////////////////////////////
 
+// This function is used for updating client info that is read-only
 handlers.updatePlayerInfo = function(args){
 
     var firstname = args.firstname;
@@ -94,7 +97,7 @@ function initializePlayerWorth(currentPlayerIds){
         Permission: "Public"
     }
 
-    sever.UpdateUserData(updatePlayerWorth);
+    server.UpdateUserData(updatePlayerWorth);
 
     log.debug("Set user worth at initial creation");
 }
@@ -105,12 +108,12 @@ handlers.initPlayerTicketAndPoint = function(args){
 
 handlers.addMatch = function (args){
     var matchInfo = {
-        matchid: args.matchid,
+        matchid: args.matchId,
         home: args.home,
         away: args.away,
         time: args.times,
         stadion: args.stadion,
-        tayangdi: args.tayangdi,
+        tayangdi: args.tayangDi,
         status: args.status
     };
 
@@ -124,8 +127,15 @@ handlers.addMatch = function (args){
 
     var matchData = matchTitleData.Data["matchData"];
     matchData.push(matchInfo);
-
     log.debug(matchData);
+
+    var titleData ={
+        Key: "matchData",
+        Value:matchData
+    }
+
+    server.SetTitleData(titleData);
+    console.log("The server pushed a new match data to the match list");
 }
 
 handlers.addBet = function(args){
@@ -134,13 +144,30 @@ handlers.addBet = function(args){
         Keys:["matchData"]
     }
 
+    var isExistMatch = false;
+
     var matchDataRequest = server.GetTitleData(matchKey);
     var matchData = matchDataRequest.Data["matchData"];
     log.debug(matchData);
 
-    //if(1==1){
-    //
-    //}
+    for(var match in matchData){
+        if(match.matchid == args.matchId){
+            isExistMatch= true;
+        }
+    }
+
+    if(isExistMatch){
+        var betData = {
+            matchid: args.matchId,
+            winner: args.winner,
+            score: args.score,
+            ticket: args.ticket
+        }
+
+        server.UpdateUserData(betData);
+    }
+
+    log.debug("server added the bet info for the selected match with match id : "+args.matchId);
 }
 
 // This is a function that the game client would call whenever a player completes
@@ -190,6 +217,10 @@ handlers.updatePlayerMove = function (args) {
     var validMove = processPlayerMove(args);
     return { validMove: validMove };
 }
+
+//////////////////////////////////////////////////////////////////////////
+// -- This is the end of custom script for the Application of OneTwo -- //
+//////////////////////////////////////////////////////////////////////////
 
 
 // This is a helper function that verifies that the player's move wasn't made

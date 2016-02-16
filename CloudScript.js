@@ -135,8 +135,8 @@ handlers.addMatch = function (args){
     var matchTitleData = server.GetTitleData(titleKeys);
 
     log.debug(matchTitleData);
-
     var matchData = matchTitleData.Data["matchData"];
+    log.debug(matchData);
     if(matchData==null){
         matchData = new Array();
     }
@@ -145,7 +145,7 @@ handlers.addMatch = function (args){
 
     var titleData ={
         Key: "matchData",
-        Value:matchData
+        Value:{array:matchData}
     }
 
     server.SetTitleData(titleData);

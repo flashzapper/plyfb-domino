@@ -106,6 +106,17 @@ handlers.initPlayerTicketAndPoint = function(args){
     initializePlayerWorth(currentPlayerId);
 }
 
+handlers.giveTicketToAllPlayer = function(args){
+    var isReplace = args.isreplace;
+
+    var ticketRequest = {
+        Keys: ["weeklyTicket"]
+    }
+
+    var ticketData = server.GetTitleData(ticketRequest).Data["weeklyTicket"];
+
+}
+
 handlers.addMatch = function (args){
     var matchInfo = {
         matchid: args.matchId,
@@ -126,6 +137,9 @@ handlers.addMatch = function (args){
     log.debug(matchTitleData);
 
     var matchData = matchTitleData.Data["matchData"];
+    if(matchData==null){
+        matchData = new Array();
+    }
     matchData.push(matchInfo);
     log.debug(matchData);
 

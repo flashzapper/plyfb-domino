@@ -138,16 +138,18 @@ handlers.addMatch = function (args){
     var matchData = matchTitleData.Data["matchData"];
     log.debug(matchData);
     if(matchData!=null){
-        matchData = matchData["array"];
+        matchData = JSON.parse(matchData);
     }else{
         matchData = new Array();
     }
     matchData.push(matchInfo);
     log.debug(matchData);
 
+    matchData = JSON.stringify(matchData);
+
     var titleData ={
         Key: "matchData",
-        Value:{array:matchData}
+        Value:matchData
     }
 
     server.SetTitleData(titleData);

@@ -50,6 +50,7 @@ handlers.helloWorld = function (args) {
 // This function is used for updating client info that is read-only
 
 handlers.updatePlayerInfo = function(args){
+
     var firstname = args.firstname;
     var lastname = args.lastname;
     var city = args.city;
@@ -69,6 +70,73 @@ handlers.updatePlayerInfo = function(args){
     });
 
     log.debug("Set User info for player " + currentPlayerId + " to first name" + firstname);
+
+    initializePlayerWorth(currentPlayerId);
+}
+
+function initializePlayerWorth(currentPlayerIds){
+
+    var keys = {
+       Keys: ['weeklyTicket']
+    }
+    var playerTicketRequest = server.GetTitleData(keys);
+
+    log.debug(playerTicketRequest);
+
+    var playerTicket = playerTicketRequest.data.Data.weeklyTicket;
+
+    var updatePlayerWorth = {
+        PlayFabId : currentPlayerIds,
+        Data: {
+            playerTicket: playerTicket,
+            playerPoint: 0
+            },
+        Permission: "Public"
+    }
+
+    sever.UpdateUserData(updatePlayerWorth);
+
+    log.debug("Set user worth at initial creation");
+}
+
+handlers.addMatch = function (args){
+    var matchInfo = {
+        matchid: args.matchid,
+        home: args.home,
+        away: args.away,
+        time: args.times,
+        stadion: args.stadion,
+        tayangdi: args.tayangdi,
+        status: args.status
+    };
+
+    var titleKeys = {
+        Keys: ["matchData"]
+    }
+
+    var matchTitleData = server.GetTitleData(titleKeys);
+
+    log.debug(matchTitleData);
+
+    var matchData = matchTitleData.data.Data["matchData"];
+    matchData.push(matchInfo);
+
+    log.debug(matchData);
+}
+
+handlers.addBet = function(args){
+
+    var matchKey = {
+        Keys:["matchData"]
+    }
+
+    var matchDataRequest = server.GetTitleData(matchKey);
+    var matchData = matchDataRequest.data.Data["matchData"];
+    log.debug(matchData);
+
+    //if(1==1){
+    //
+    //}
 }
 
 // This is a function that the game client would call whenever a player completes

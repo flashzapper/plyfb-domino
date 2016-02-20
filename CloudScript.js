@@ -203,12 +203,13 @@ handlers.addBet = function(args){
             Keys:["bet"]
         });
 
-        betData = betData.Data["bet"]["Value"];
-        betData = JSON.parse(betData);
-        log.debug(betData);
-
         if(betData!=null){
             log.debug("Bet data NOT is empty");
+
+            betData = betData.Data["bet"]["Value"];
+            betData = JSON.parse(betData);
+            log.debug(betData);
+
             betData.push({
                 matchid: args.matchId,
                 winner: args.winner,

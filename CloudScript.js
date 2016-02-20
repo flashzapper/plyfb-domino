@@ -204,10 +204,17 @@ handlers.addBet = function(args){
         });
 
         betData = betData.Data["bet"];
+        betData = JSON.parse(betData);
         log.debug(betData);
 
         if(betData!=null){
             log.debug("Bet data NOT is empty");
+            betData.push({
+                matchid: args.matchId,
+                winner: args.winner,
+                score: args.score,
+                ticket: args.ticket
+            });
         }else{
             log.debug("Bet data IS empty");
             betData = [];
@@ -217,8 +224,9 @@ handlers.addBet = function(args){
                 score: args.score,
                 ticket: args.ticket
             });
-            log.debug("This is the bet data : "+betData);
         }
+        betData = JSON.stringify(betData);
+        log.debug("This is the bet data : "+betData);
         //betData = JSON.stringify(betData);
         //var updateBetData = {
         //    PlayFabId: currentPlayerId,

@@ -186,9 +186,9 @@ handlers.addBet = function(args){
 
     var matchDataRequest = server.GetTitleData(matchKey);
     var matchData = matchDataRequest.Data["matchData"];
-    log.debug(matchData);
 
     for(var match in matchData){
+        log.debug(match.matchid+" compared to "+ args.matchId);
         if(match.matchid == args.matchId){
             isExistMatch= true;
         }
@@ -205,7 +205,7 @@ handlers.addBet = function(args){
             },
             Permission:'Public'
         }
-        console.log("its logged inside, it should be there");
+        log.debug("its logged inside, it should be there");
         server.UpdateUserReadOnlyData(betData);
     }
 

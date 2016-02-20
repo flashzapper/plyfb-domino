@@ -156,6 +156,26 @@ handlers.addMatch = function (args){
     log.debug("The server pushed a new match data to the match list");
 }
 
+handlers.removeMatch = function(args){
+    matchid = args.matchId;
+
+    var titleKeys ={
+        Keys:["matchData"]
+    }
+
+    var deletedMatch = null;
+
+    var matchTitleData = server.GetTitleData(titleKeys).Data["matchData"];
+    for(var match in  matchTitleData){
+        if(match.matchid == matchid){
+            deletedMatch = match;
+            break;
+        }
+    }
+
+    matchTitleData.remove
+}
+
 handlers.addBet = function(args){
 
     var matchKey = {
@@ -176,13 +196,17 @@ handlers.addBet = function(args){
 
     if(isExistMatch){
         var betData = {
-            matchid: args.matchId,
-            winner: args.winner,
-            score: args.score,
-            ticket: args.ticket
+            PlayFabId: currentPlayerId,
+            Data:{
+                matchid: args.matchId,
+                winner: args.winner,
+                score: args.score,
+                ticket: args.ticket
+            },
+            Permission:'Public'
         }
 
-        server.UpdateUserData(betData);
+        server.UpdateUserReadOnlyData(betData);
     }
 
     log.debug("server added the bet info for the selected match with match id : "+args.matchId);

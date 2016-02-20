@@ -228,7 +228,6 @@ handlers.addBet = function(args){
         }
         betData = JSON.stringify(betData);
         //log.debug("This is the bet data : "+betData);a
-        betData = JSON.stringify(betData);
         var updateBetData = {
             PlayFabId: currentPlayerId,
             Data:{

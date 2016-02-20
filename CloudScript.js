@@ -220,14 +220,14 @@ handlers.addBet = function(args){
             log.debug("This is the bet data : "+betData);
         }
 
-        var betData = {
+        var updateBetData = {
             PlayFabId: currentPlayerId,
             Data:{
                 bet:betData
             },
             Permission:'Public'
         }
-        var updateRequest = server.UpdateUserReadOnlyData(betData);
+        var updateRequest = server.UpdateUserReadOnlyData(updateBetData);
         if(updateRequest.code!=200){
             return {messageError: "Saving data error"};
         }

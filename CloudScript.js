@@ -197,21 +197,36 @@ handlers.addBet = function(args){
     }
     //
     if(isExistMatch){
-        var betData = {
-            PlayFabId: currentPlayerId,
-            Data:{
-                matchid: args.matchId,
-                winner: args.winner,
-                score: args.score,
-                ticket: args.ticket
-            },
-            Permission:'Public'
-        }
-        log.debug("its logged inside, it should be there");
-        server.UpdateUserReadOnlyData(betData);
-    }
 
-    log.debug("server added the bet info for the selected match with match id : "+args.matchId);
+        betData = server.GetUserReadOnlyData({
+            PlayFabId: currentPlayerId,
+            Keys:["bet"]
+        });
+
+        betData = betData.data.Data;
+        log.debug(betData);
+
+        //var betData = {
+        //    PlayFabId: currentPlayerId,
+        //    Data:{
+        //        Bet:{
+        //            matchid: args.matchId,
+        //            winner: args.winner,
+        //            score: args.score,
+        //            ticket: args.ticket
+        //        }
+        //    },
+        //    Permission:'Public'
+        //}
+        //log.debug("its logged inside, it should be there");
+        //var updateRequest = server.UpdateUserReadOnlyData(betData);
+        //if(updateRequest.code!=200){
+        //    return {messageError: "Saving data error"};
+        //}
+        //else{
+        //    log.debug("server added the bet info for the selected match with match id : "+args.matchId);
+        //}
+    }
 }
 
 // This is a function that the game client would call whenever a player completes

@@ -219,7 +219,7 @@ handlers.addBet = function(args){
             });
             log.debug("This is the bet data : "+betData);
         }
-
+        betData = JSON.stringify(betData);
         var updateBetData = {
             PlayFabId: currentPlayerId,
             Data:{

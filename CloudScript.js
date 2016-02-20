@@ -186,11 +186,11 @@ handlers.addBet = function(args){
 
     var matchDataRequest = server.GetTitleData(matchKey);
     var matchData = matchDataRequest.Data["matchData"];
-    log.debug(" Match data : "+JSON.parse(matchData));
+    //log.debug(" Match data : "+JSON.parse(matchData));
     matchData = JSON.parse(matchData);
     for(var match in matchData){
-        log.debug(" the match : "+matchData[match]+" ");
-        log.debug(matchData[match].matchid+" compared to "+ args.matchId);
+        //log.debug(" the match : "+matchData[match]+" ");
+        //log.debug(matchData[match].matchid+" compared to "+ args.matchId);
         if(matchData[match].matchid == args.matchId){
             isExistMatch= true;
         }
@@ -204,28 +204,34 @@ handlers.addBet = function(args){
         });
 
         betData = betData.data;
-        log.debug(betData);
+        log.debug("This is the bet data : "+betData);
 
-        //var betData = {
-        //    PlayFabId: currentPlayerId,
-        //    Data:{
-        //        Bet:{
-        //            matchid: args.matchId,
-        //            winner: args.winner,
-        //            score: args.score,
-        //            ticket: args.ticket
-        //        }
-        //    },
-        //    Permission:'Public'
-        //}
-        //log.debug("its logged inside, it should be there");
-        //var updateRequest = server.UpdateUserReadOnlyData(betData);
-        //if(updateRequest.code!=200){
-        //    return {messageError: "Saving data error"};
-        //}
-        //else{
-        //    log.debug("server added the bet info for the selected match with match id : "+args.matchId);
-        //}
+        if(betData){
+
+        }else{
+            betData = [];
+            betData.push({
+                matchid: args.matchId,
+                winner: args.winner,
+                score: args.score,
+                ticket: args.ticket
+            });
+        }
+
+        var betData = {
+            PlayFabId: currentPlayerId,
+            Data:{
+                Bet:betData
+            },
+            Permission:'Public'
+        }
+        var updateRequest = server.UpdateUserReadOnlyData(betData);
+        if(updateRequest.code!=200){
+            return {messageError: "Saving data error"};
+        }
+        else{
+            log.debug("server added the bet info for the selected match with match id : "+args.matchId);
+        }
     }
 }
 

@@ -204,7 +204,7 @@ handlers.addBet = function(args){
         });
 
         betData = betData.Data["bet"];
-        betData = JSON.parse(betData);
+        //betData = JSON.parse(betData);
         log.debug(betData);
 
         //if(betData!=null){

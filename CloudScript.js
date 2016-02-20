@@ -190,7 +190,7 @@ handlers.addBet = function(args){
     matchData = JSON.parse(matchData);
     for(var match in matchData){
         log.debug(" the match : "+match+" ");
-    //    log.debug(match.matchid+" compared to "+ args.matchId);
+        log.debug(match.matchid+" compared to "+ args.matchId);
     //    if(match.matchid == args.matchId){
     //        isExistMatch= true;
     //    }

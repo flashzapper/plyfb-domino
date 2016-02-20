@@ -186,8 +186,9 @@ handlers.addBet = function(args){
 
     var matchDataRequest = server.GetTitleData(matchKey);
     var matchData = JSON.parse(matchDataRequest.Data["matchData"]);
-
+    log.debug(matchData);
     for(var match in matchData){
+        log.debug(match);
         log.debug(match.matchid+" compared to "+ args.matchId);
         if(match.matchid == args.matchId){
             isExistMatch= true;

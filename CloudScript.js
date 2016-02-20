@@ -205,7 +205,7 @@ handlers.addBet = function(args){
 
         log.debug(betData.Data);
 
-        if(betData.Data!=null){
+        if(betData.Data["bet"]){
             log.debug("Bet data NOT is empty");
 
             betData = betData.Data["bet"]["Value"];

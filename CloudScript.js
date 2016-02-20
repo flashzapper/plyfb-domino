@@ -206,7 +206,7 @@ handlers.addBet = function(args){
         betData = betData.data;
         log.debug("This is the bet data : "+betData);
 
-        if(betData){
+        if(betData==null){
 
         }else{
             betData = [];

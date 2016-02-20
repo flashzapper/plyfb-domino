@@ -203,9 +203,9 @@ handlers.addBet = function(args){
             Keys:["bet"]
         });
 
-        log.debug(betData);
+        log.debug(betData.Data);
 
-        if(betData!=null){
+        if(betData.Data!=null){
             log.debug("Bet data NOT is empty");
 
             betData = betData.Data["bet"]["Value"];
@@ -229,7 +229,7 @@ handlers.addBet = function(args){
             });
         }
         betData = JSON.stringify(betData);
-        //log.debug("This is the bet data : "+betData);a
+        log.debug("This is the bet data : "+betData);a
         var updateBetData = {
             PlayFabId: currentPlayerId,
             Data:{

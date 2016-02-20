@@ -204,7 +204,7 @@ handlers.addBet = function(args){
         });
 
         //betData = betData.data;
-        log.debug(betData);
+        log.debug(Object.keys(betData));
 
         if(betData!=null){
             log.debug("Bet data NOT is empty");

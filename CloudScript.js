@@ -205,7 +205,7 @@ handlers.addBet = function(args){
             },
             Permission:'Public'
         }
-
+        console.log("its logged inside, it should be there");
         server.UpdateUserReadOnlyData(betData);
     }
 

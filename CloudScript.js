@@ -187,28 +187,28 @@ handlers.addBet = function(args){
     var matchDataRequest = server.GetTitleData(matchKey);
     var matchData = JSON.parse(matchDataRequest.Data["matchData"][0]);
     log.debug(matchData);
-    for(var match in matchData){
-        log.debug(match);
-        log.debug(match.matchid+" compared to "+ args.matchId);
-        if(match.matchid == args.matchId){
-            isExistMatch= true;
-        }
-    }
-
-    if(isExistMatch){
-        var betData = {
-            PlayFabId: currentPlayerId,
-            Data:{
-                matchid: args.matchId,
-                winner: args.winner,
-                score: args.score,
-                ticket: args.ticket
-            },
-            Permission:'Public'
-        }
-        log.debug("its logged inside, it should be there");
-        server.UpdateUserReadOnlyData(betData);
-    }
+    //for(var match in matchData){
+    //    log.debug(match);
+    //    log.debug(match.matchid+" compared to "+ args.matchId);
+    //    if(match.matchid == args.matchId){
+    //        isExistMatch= true;
+    //    }
+    //}
+    //
+    //if(isExistMatch){
+    //    var betData = {
+    //        PlayFabId: currentPlayerId,
+    //        Data:{
+    //            matchid: args.matchId,
+    //            winner: args.winner,
+    //            score: args.score,
+    //            ticket: args.ticket
+    //        },
+    //        Permission:'Public'
+    //    }
+    //    log.debug("its logged inside, it should be there");
+    //    server.UpdateUserReadOnlyData(betData);
+    //}
 
     log.debug("server added the bet info for the selected match with match id : "+args.matchId);
 }

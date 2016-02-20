@@ -203,7 +203,7 @@ handlers.addBet = function(args){
             Keys:["bet"]
         });
 
-        betData = betData.Data["bet"];
+        betData = betData.Data["bet"]["Value"];
         //betData = JSON.parse(betData);
         log.debug(betData);
 

@@ -203,7 +203,7 @@ handlers.addBet = function(args){
             Keys:["bet"]
         });
 
-        betData = betData.data;
+        //betData = betData.data;
         log.debug("This is the bet data : "+betData);
 
         if(betData!=null){
@@ -219,21 +219,21 @@ handlers.addBet = function(args){
             });
             log.debug("This is the bet data : "+betData);
         }
-        betData = JSON.stringify(betData);
-        var updateBetData = {
-            PlayFabId: currentPlayerId,
-            Data:{
-                bet:betData
-            },
-            Permission:'Public'
-        }
-        var updateRequest = server.UpdateUserReadOnlyData(updateBetData);
-        if(updateRequest.code!=200){
-            return {messageError: "Saving data error"};
-        }
-        else{
-            log.debug("server added the bet info for the selected match with match id : "+args.matchId);
-        }
+        //betData = JSON.stringify(betData);
+        //var updateBetData = {
+        //    PlayFabId: currentPlayerId,
+        //    Data:{
+        //        bet:betData
+        //    },
+        //    Permission:'Public'
+        //}
+        //var updateRequest = server.UpdateUserReadOnlyData(updateBetData);
+        //if(updateRequest.code!=200){
+        //    return {messageError: "Saving data error"};
+        //}
+        //else{
+        //    log.debug("server added the bet info for the selected match with match id : "+args.matchId);
+        //}
     }
 }
 

@@ -186,7 +186,7 @@ handlers.addBet = function(args){
 
     var matchDataRequest = server.GetTitleData(matchKey);
     var matchData = matchDataRequest.Data["matchData"];
-    log.debug(" Match data : "+matchData);
+    log.debug(" Match data : "+JSON.parse(matchData));
     for(var match in matchData){
         log.debug(" the match : "+match+" ");
     //    log.debug(match.matchid+" compared to "+ args.matchId);

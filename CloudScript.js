@@ -268,7 +268,7 @@ handlers.getJSON = function(args){
     //xhr.open( "GET", args.url, true );
     //xhr.send( null );
 
-    var returnValue = http.reqest(baseURL+args.url, "GET","");
+    var returnValue = http.request(baseURL+args.url, "GET");
     if(returnValue!="") {
         log.debug("the value are returned : " + returnValue);
         return returnValue;

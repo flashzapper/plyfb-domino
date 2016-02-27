@@ -247,6 +247,28 @@ handlers.addBet = function(args){
     }
 }
 
+handlers.getJSON = function(args){
+
+    var xhr = new XMLHttpRequest();
+
+    xhr.onload = function(){
+        if ( xhr.readyState == 4 && xhr.status == 200 )
+        {
+            if ( xhr.responseText == "Not found" )
+            {
+                return xhr.response;
+            }
+            else
+            {
+                //console.log(JSON.parse(xmlHttp.responseText));
+                return JSON.parse(xhr.responseText);
+            }
+        }
+    };
+    xhr.open( "GET", args.url, true );
+    xhr.send( null );
+}
+
 // This is a function that the game client would call whenever a player completes
 // a level. It updates a setting in the player's data that only game server
 // code can write - it is read-only on the client - and it updates a player

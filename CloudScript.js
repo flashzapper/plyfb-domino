@@ -248,25 +248,31 @@ handlers.addBet = function(args){
 }
 
 handlers.getJSON = function(args){
+    var baseURL = "http://playserverjson.hol.es/public/api/getJSON/";
+    //var xhr = new XMLHttpRequest();
+    //
+    //xhr.onload = function(){
+    //    if ( xhr.readyState == 4 && xhr.status == 200 )
+    //    {
+    //        if ( xhr.responseText == "Not found" )
+    //        {
+    //            return xhr.response;
+    //        }
+    //        else
+    //        {
+    //            //console.log(JSON.parse(xmlHttp.responseText));
+    //            return JSON.parse(xhr.responseText);
+    //        }
+    //    }
+    //};
+    //xhr.open( "GET", args.url, true );
+    //xhr.send( null );
 
-    var xhr = new XMLHttpRequest();
-
-    xhr.onload = function(){
-        if ( xhr.readyState == 4 && xhr.status == 200 )
-        {
-            if ( xhr.responseText == "Not found" )
-            {
-                return xhr.response;
-            }
-            else
-            {
-                //console.log(JSON.parse(xmlHttp.responseText));
-                return JSON.parse(xhr.responseText);
-            }
-        }
-    };
-    xhr.open( "GET", args.url, true );
-    xhr.send( null );
+    var returnValue = http.reqest(baseURL+args.url, "GET","");
+    if(returnValue!="") {
+        log.debug("the value are returned : " + returnValue);
+        return returnValue;
+    }
 }
 
 // This is a function that the game client would call whenever a player completes

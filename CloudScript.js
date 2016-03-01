@@ -94,9 +94,16 @@ function initializePlayerWorth(currentPlayerIds){
 }
 
 handlers.getMatchList = function (args) {
-    var params = "playfabId="+args.playfabId+"&date="+args.date;
 
-    var returnValue = http.request(baseURL+"getMatchList", "post",params);
+    var parsePar = {
+        playfabId: args.plafabId,
+        date: args.date
+    }
+
+    //var params = "playfabId="+args.playfabId+"&date="+args.date;
+    var params = JSON.stringify(parsePar);
+
+    var returnValue = http.request(baseURL+"getMatchList", "post",params, "application/json");
     if(returnValue!="") {
         log.debug("the value are returned : " + returnValue);
         return returnValue;

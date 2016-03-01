@@ -111,7 +111,7 @@ handlers.addPointsToUser=function(args){
 
     var userPoint = 0;
     if(userPointRequest.Data["playerPoint"]!=null){
-        log.debug(JSON.parse(userPointRequest.Data["playerPoint"]));
+        log.debug(userPointRequest.Data["playerPoint"].Value);
         //userPoint = JSON.parse(userPointRequest.Data["playerPoint"]);
     };
 

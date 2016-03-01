@@ -100,3 +100,14 @@ handlers.getMatchList = function (args) {
         return returnValue;
     }
 }
+
+handlers.addBet = function(args){
+    var params = "matchId="+args.matchId+"&playfabId="+args.playfabId+"&winner="+args.winner+"&score="+args.score+"&ticket="+args.ticket;
+
+    var returnValue = http.request(baseURL+"addBet", "post", params);
+
+    if(returnValue!=""){
+        log.debug("the value are returned : "+returnValue);
+        return returnValue;
+    }
+}

@@ -114,7 +114,7 @@ handlers.addPointsToUser=function(args){
 
     log.debug("The user point is :"+userPoint);
 
-    var totalPoint = userPoint+args.point;
+    var totalPoint = parseInt(userPoint)+parseInt(args.point);
 
     log.debug("The total point is :"+totalPoint);
 
@@ -128,10 +128,10 @@ handlers.addPointsToUser=function(args){
 
     var updateRequest = server.UpdateUserReadOnlyData(updatePlayerWorth);
     if(updateRequest.code!=200){
-        return {messageError:updateRequest};
+        return {messageError:updateRequest.code};
     }
     else{
-        log.debug("server added the point info to player_id : "+args.playerId);
+        return {messageSuccess:"Data have been saved"};
     }
 }
 

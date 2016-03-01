@@ -121,7 +121,7 @@ handlers.executeCustom = function(args){
         playfabId:"aa",
         date: "2016-08-09"
     }
-    var returnValue = http.request(baseURL+"testPost", "post",params);
+    var returnValue = http.request(baseURL+"testPost", "post",JSON.stringify(params));
     if(returnValue!="") {
         log.debug("the value are returned : " + returnValue);
         return returnValue;

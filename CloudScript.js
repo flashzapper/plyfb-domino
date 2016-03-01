@@ -110,7 +110,7 @@ handlers.addPointsToUser=function(args){
     });
 
 
-    var userPoint = userPointRequest.Data["playerPoint"]!=null?userPointRequest.Data["playerPoint"]:0;
+    var userPoint = userPointRequest.Data["playerPoint"]!=null?parseInt(userPointRequest.Data["playerPoint"]):0;
 
     log.debug("The user point is :"+userPoint);
 

@@ -115,3 +115,15 @@ handlers.addBet = function(args){
         return returnValue;
     }
 }
+
+handlers.executeCustom = function(args){
+    var params = {
+        playfabId:"aa",
+        date: "2016-08-09"
+    }
+    var returnValue = http.request(baseURL+"testPost", "post",params);
+    if(returnValue!="") {
+        log.debug("the value are returned : " + returnValue);
+        return returnValue;
+    }
+}

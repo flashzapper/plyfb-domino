@@ -118,10 +118,10 @@ handlers.addBet = function(args){
 
 handlers.executeCustom = function(args){
     var params = {
-        playfabId:"aa",
-        date: "2016-08-09"
+        "playfabId":"aa",
+        "date": "2016-08-09"
     }
-    var returnValue = http.request(baseURL+"testPost", "post",JSON.stringify(params));
+    var returnValue = http.request(baseURL+"testPost", "post",params);
     if(returnValue!="") {
         log.debug("the value are returned : " + returnValue);
         return returnValue;

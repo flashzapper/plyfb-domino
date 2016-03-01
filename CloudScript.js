@@ -111,30 +111,31 @@ handlers.addPointsToUser=function(args){
 
     var userPoint = 0;
     if(userPointRequest.Data["playerPoint"]!=null){
-        userPoint = JSON.parse(userPointRequest.Data["playerPoint"]);
+        debug.log(userPointRequest);
+        //userPoint = JSON.parse(userPointRequest.Data["playerPoint"]);
     };
 
-    log.debug("The user point is :"+userPoint);
-
-    var totalPoint = parseInt(userPoint)+parseInt(args.point);
-
-    log.debug("The total point is :"+totalPoint);
-
-    var updatePlayerWorth = {
-        PlayFabId : args.playerId,
-        Data: {
-            playerPoint: totalPoint
-        },
-        Permission: "Public"
-    }
-
-    var updateRequest = server.UpdateUserReadOnlyData(updatePlayerWorth);
-    if(updateRequest.code!=200){
-        return {messageError:updateRequest.code};
-    }
-    else{
-        return {messageSuccess:"Data have been saved"};
-    }
+    //log.debug("The user point is :"+userPoint);
+    //
+    //var totalPoint = parseInt(userPoint)+parseInt(args.point);
+    //
+    //log.debug("The total point is :"+totalPoint);
+    //
+    //var updatePlayerWorth = {
+    //    PlayFabId : args.playerId,
+    //    Data: {
+    //        playerPoint: totalPoint
+    //    },
+    //    Permission: "Public"
+    //}
+    //
+    //var updateRequest = server.UpdateUserReadOnlyData(updatePlayerWorth);
+    //if(updateRequest.code!=200){
+    //    return {messageError:updateRequest.code};
+    //}
+    //else{
+    //    return {messageSuccess:"Data have been saved"};
+    //}
 }
 
 handlers.initPlayerTicketAndPoint = function(args){

@@ -109,9 +109,14 @@ handlers.addPointsToUser=function(args){
         Keys:["playerPoint"]
     });
 
-    var userPoint = userPointRequest.Data["playerPoint"];
+
+    var userPoint = userPointRequest.Data["playerPoint"]!=null?userPointRequest.Data["playerPoint"]:0;
+
+    log.debug("The user point is :"+userPoint);
 
     var totalPoint = userPoint+args.point;
+
+    log.debug("The total point is :"+totalPoint);
 
     var updatePlayerWorth = {
         PlayFabId : args.playerId,
@@ -121,7 +126,13 @@ handlers.addPointsToUser=function(args){
         Permission: "Public"
     }
 
-    server.UpdateUserReadOnlyData(updatePlayerWorth);
+    var updateRequest = server.UpdateUserReadOnlyData(updatePlayerWorth);
+    if(updateRequest.code!=200){
+        return {messageError: "Saving data error"};
+    }
+    else{
+        log.debug("server added the point info to player_id : "+args.playerId);
+    }
 }
 
 handlers.initPlayerTicketAndPoint = function(args){

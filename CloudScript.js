@@ -94,7 +94,7 @@ function initializePlayerWorth(currentPlayerIds){
 }
 
 handlers.getMatchList = function (args) {
-    var params = "playfabId=aa&date=2016-08-09";
+    var params = "playfabId="+args.actionId+"&date="+arg.date;
 
     var returnValue = http.request(baseURL+"getMatchList", "post",params);
     if(returnValue!="") {

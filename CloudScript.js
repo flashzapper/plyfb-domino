@@ -97,9 +97,31 @@ function initializePlayerWorth(currentPlayerIds){
         Permission: "Public"
     }
 
-    server.UpdateUserData(updatePlayerWorth);
+    server.UpdateUserReadOnlyData(updatePlayerWorth);
 
     log.debug("Set user worth at initial creation");
+}
+
+handlers.addPointsToUser=function(args){
+
+   var userPointRequest = server.GetUserReadOnlyData({
+        PlayFabId: args.playerId,
+        Keys:["playerPoint"]
+    });
+
+    var userPoint = userPointRequest.Data["playerPoint"];
+
+    var totalPoint = userPoint+args.point;
+
+    var updatePlayerWorth = {
+        PlayFabId : args.playerId,
+        Data: {
+            playerPoint: totalPoint
+        },
+        Permission: "Public"
+    }
+
+    server.UpdateUserReadOnlyData(updatePlayerWorth);
 }
 
 handlers.initPlayerTicketAndPoint = function(args){
@@ -114,7 +136,6 @@ handlers.giveTicketToAllPlayer = function(args){
     }
 
     var ticketData = server.GetTitleData(ticketRequest).Data["weeklyTicket"];
-
 }
 
 handlers.addMatch = function (args){
@@ -249,24 +270,6 @@ handlers.addBet = function(args){
 
 handlers.getJSON = function(args){
     var baseURL = "http://playserverjson.hol.es/public/api/getJSON/";
-    //var xhr = new XMLHttpRequest();
-    //
-    //xhr.onload = function(){
-    //    if ( xhr.readyState == 4 && xhr.status == 200 )
-    //    {
-    //        if ( xhr.responseText == "Not found" )
-    //        {
-    //            return xhr.response;
-    //        }
-    //        else
-    //        {
-    //            //console.log(JSON.parse(xmlHttp.responseText));
-    //            return JSON.parse(xhr.responseText);
-    //        }
-    //    }
-    //};
-    //xhr.open( "GET", args.url, true );
-    //xhr.send( null );
 
     var returnValue = http.request(baseURL+args.url, "GET");
     if(returnValue!="") {

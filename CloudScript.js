@@ -128,7 +128,7 @@ handlers.addPointsToUser=function(args){
 
     var updateRequest = server.UpdateUserReadOnlyData(updatePlayerWorth);
     if(updateRequest.code!=200){
-        return {messageError: "Saving data error"};
+        return {messageError: "Saving data error with message :"+updateRequest};
     }
     else{
         log.debug("server added the point info to player_id : "+args.playerId);

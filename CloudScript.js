@@ -80,7 +80,7 @@ function initializePlayerWorth(currentPlayerIds){
     var playerTicket = playerTicketRequest.Data["weeklyTicket"];
 
     var updatePlayerWorth = {
-        PlayFabId : currentPlayerIds,
+        PlayFabId : currentPlayerId,
         Data: {
             playerTicket: playerTicket,
             playerPoint: 0
@@ -111,7 +111,7 @@ handlers.getMatchList = function (args) {
 }
 
 handlers.addBet = function(args){
-    var params = "matchId="+args.matchId+"&playfabId="+args.playfabId+"&winner="+args.winner+"&score="+args.score+"&ticket="+args.ticket;
+    var params = "matchId="+args.matchId+"&playfabId="+currentPlayerId+"&winner="+args.winner+"&score="+args.score+"&ticket="+args.ticket;
 
     var returnValue = http.request(baseURL+"addBet", "post", params);
 

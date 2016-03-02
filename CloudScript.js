@@ -121,7 +121,7 @@ handlers.addBet = function(args){
 
     var params = JSON.stringify(paramsBet);
 
-    var returnValue = http.request(baseURL+"addBet", "post", params);
+    var returnValue = http.request(baseURL+"addBet", "post", params, "application/json");
 
     if(returnValue!=""){
         log.debug("the value are returned : "+returnValue);

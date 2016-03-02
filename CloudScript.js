@@ -119,7 +119,7 @@ handlers.addBet = function(args){
         ticket:args.ticket
         }
 
-    var params = JSON.stringify(parsePar);
+    var params = JSON.stringify(paramsBet);
 
     var returnValue = http.request(baseURL+"addBet", "post", params);
 

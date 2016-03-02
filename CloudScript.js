@@ -96,7 +96,7 @@ function initializePlayerWorth(currentPlayerIds){
 handlers.getMatchList = function (args) {
 
     var parsePar = {
-        playfabId: args.plafabId,
+        playfabId: args.playfabId,
         date: args.date
     }
 

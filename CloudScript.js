@@ -111,7 +111,15 @@ handlers.getMatchList = function (args) {
 }
 
 handlers.addBet = function(args){
-    var params = "matchId="+args.matchId+"&playfabId="+currentPlayerId+"&winner="+args.winner+"&score="+args.score+"&ticket="+args.ticket;
+    var paramsBet = {
+        matchId:args.matchId,
+        playfabId:currentPlayerId,
+        winner: args.winner,
+        score:args.score,
+        ticket:args.ticket
+        }
+
+    var params = JSON.stringify(parsePar);
 
     var returnValue = http.request(baseURL+"addBet", "post", params);
 

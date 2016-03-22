@@ -2,7 +2,8 @@
  * Created by Gean on 3/1/2016.
  */
 
-var baseURL = "http://playserverjson.hol.es/ABC/public/api/";
+//var baseURL = "http://playserverjson.hol.es/ABC/public/api/";
+var baseURL = "http://103.43.46.97/football0120/public/";
 
 handlers.updatePlayerInfo = function(args){
 
@@ -113,18 +114,19 @@ handlers.getMatchList = function (args) {
 handlers.addBet = function(args){
     var paramsBet = {
         matchId:args.matchId,
-        playfabId:currentPlayerId,
+        userId:currentPlayerId,
         winner: args.winner,
-        score:args.score,
+        homeScore:args.homeScore,
+        awayScore:args.awayScore,
         ticket:args.ticket
         }
 
     var params = JSON.stringify(paramsBet);
 
-    var returnValue = http.request(baseURL+"addBet", "post", params, "application/json");
+    var returnValue = http.request(baseURL+"bet/addBet", "post", params, "application/json");
 
     if(returnValue!=""){
-        log.debug("the value are returned : "+returnValue);
+        //log.debug("the value are returned : "+returnValue);
         return returnValue;
     }
 }

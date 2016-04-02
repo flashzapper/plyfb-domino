@@ -35,12 +35,14 @@ handlers.setVersions = function (args) {
     for (var key in args){
         log.debug("the key value are : " + key);
         if(args.hasOwnProperty(key)){
+            log.debug("the args have the key");
             var titleParams = {
                 Key:key,
                 Value:args[key]
             }
 
             var updateRequest = server.SetTitleData(titleParams);
+            log.debug("the request core value are : " + updateRequest.code);
             if(updateRequest.code!=200){
                 return {messageError:updateRequest.code};
             }

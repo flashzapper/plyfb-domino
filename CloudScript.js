@@ -65,33 +65,31 @@ handlers.addPointsToUser=function(args){
     }
 }
 
-handlers.initPlayerTicketAndPoint = function(args){
+handlers.getAllVersions = function(){
+    var keys = {
+        Keys: [
+                "BETVERSION",
+                "MATCHVERSION"
+        ]}
+}
+
+handlers.initPlayerTicketAndPoint = function(){
     initializePlayerWorth(currentPlayerId);
 }
 
-function initializePlayerWorth(currentPlayerIds){
-
-    var keys = {
-        Keys: ['weeklyTicket']
-    }
-    var playerTicketRequest = server.GetTitleData(keys);
-
-    log.debug(playerTicketRequest);
-
-    var playerTicket = playerTicketRequest.Data["weeklyTicket"];
-
-    var updatePlayerWorth = {
-        PlayFabId : currentPlayerId,
-        Data: {
-            playerTicket: playerTicket,
-            playerPoint: 0
-        },
-        Permission: "Public"
+function initializePlayerWorth(currentPlayerId){
+    var paramsBet = {
+        userId:currentPlayerId
     }
 
-    server.UpdateUserReadOnlyData(updatePlayerWorth);
+    var params = JSON.stringify(paramsBet);
 
-    log.debug("Set user worth at initial creation");
+    var returnValue = http.request(baseURL+"user/initializeUserWorth", "post", params, "application/json");
+
+    if(returnValue!=""){
+        //log.debug("the value are returned : "+returnValue);
+        return returnValue;
+    }
 }
 
 handlers.getMatchList = function (args) {

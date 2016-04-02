@@ -42,7 +42,7 @@ handlers.setVersions = function (args) {
             }
 
             var updateRequest = server.SetTitleData(titleParams);
-            log.debug("the request core value are : " + updateRequest.code);
+            log.debug("the request core value are : " + updateRequest);
             if(updateRequest.code!=200){
                 return {messageError:updateRequest.code};
             }

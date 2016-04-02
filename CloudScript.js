@@ -39,10 +39,7 @@ handlers.setVersions = function (args) {
                 Value:args[key]
             }
 
-            var updateRequest = server.SetTitleData(titleParams);
-            if(updateRequest.code!=200){
-                return updateRequest;
-            }
+            server.SetTitleData(titleParams);
         }
     }
     return {message:"return with successful push"};

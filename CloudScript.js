@@ -33,6 +33,7 @@ handlers.updatePlayerInfo = function(args){
 handlers.setVersions = function (args) {
 
     for (var key in args){
+        log.debug("the key value are : " + key);
         if(args.hasOwnProperty(key)){
             var titleParams = {
                 Key:key,

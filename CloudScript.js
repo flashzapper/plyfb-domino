@@ -108,7 +108,7 @@ handlers.getUserPointAndTicket = function () {
 
     var params = JSON.stringify(parsePar);
 
-    var returnValue = http.request(baseURL+"user/userWorth", "get",params, "application/json");
+    var returnValue = http.request(baseURL+"user/userWorth", "post",params, "application/json");
     if(returnValue!="") {
         log.debug("the value are returned : " + returnValue);
         return returnValue;

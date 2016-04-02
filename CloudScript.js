@@ -30,6 +30,26 @@ handlers.updatePlayerInfo = function(args){
     initializePlayerWorth(currentPlayerId);
 }
 
+handlers.setVersions = function (args) {
+
+    for (var key in args){
+        if(args.hasOwnProperty(key)){
+            var titleParams = {
+                Key:key,
+                Value:args[key]
+            }
+
+            var updateRequest = server.SetTitleData(titleParams);
+            if(updateRequest.code!=200){
+                return {messageError:updateRequest.code};
+            }
+        }
+    }
+
+    return {message:"return with successful push"};
+
+}
+
 handlers.addPointsToUser=function(args){
 
     var userPointRequest = server.GetUserReadOnlyData({

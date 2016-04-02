@@ -65,14 +65,6 @@ handlers.addPointsToUser=function(args){
     }
 }
 
-handlers.getAllVersions = function(){
-    var keys = {
-        Keys: [
-                "BETVERSION",
-                "MATCHVERSION"
-        ]}
-}
-
 handlers.initPlayerTicketAndPoint = function(){
     initializePlayerWorth(currentPlayerId);
 }
@@ -103,6 +95,20 @@ handlers.getMatchList = function (args) {
     var params = JSON.stringify(parsePar);
 
     var returnValue = http.request(baseURL+"getMatchList", "post",params, "application/json");
+    if(returnValue!="") {
+        log.debug("the value are returned : " + returnValue);
+        return returnValue;
+    }
+}
+
+handlers.getUserPointAndTicket = function () {
+    var parsePar = {
+        userId:currentPlayerId
+    }
+
+    var params = JSON.stringify(parsePar);
+
+    var returnValue = http.request(baseURL+"user/userWorth", "get",params, "application/json");
     if(returnValue!="") {
         log.debug("the value are returned : " + returnValue);
         return returnValue;

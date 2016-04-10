@@ -80,13 +80,17 @@ handlers.addPointsToUser=function(args){
     }
 }
 
-handlers.initPlayerTicketAndPoint = function(){
-    initializePlayerWorth(currentPlayerId);
+// added args params for the new method calls,
+// so its initialize not only the worth but also the user to get username
+handlers.initPlayerTicketAndPoint = function(args){
+    var name = args.username;
+    initializePlayerWorth(currentPlayerId, name);
 }
 
-function initializePlayerWorth(currentPlayerId){
+function initializePlayerWorth(currentPlayerId, username){
     var paramsBet = {
-        userId:currentPlayerId
+        userId:currentPlayerId,
+        userName: username
     }
 
     var params = JSON.stringify(paramsBet);
@@ -99,6 +103,10 @@ function initializePlayerWorth(currentPlayerId){
     }
 }
 
+// END CHANGES for initPlayerTicketAndPoint
+
+// this function is no longer called, because client app is getting the list from CSV if
+// different version are present
 handlers.getMatchList = function (args) {
 
     var parsePar = {
@@ -130,6 +138,16 @@ handlers.getUserPointAndTicket = function () {
     }
 }
 
+// get all user's bet regardless of anything
+handlers.getBetOfUser = function () {
+    var getUrl = "bet/get/".currentUserId;
+    var returnValue = http.request(baseURL+getUrl);
+    if(returnValue!="") {
+        log.debug("the value are returned : " + returnValue);
+        return returnValue;
+    }
+}
+
 handlers.addBet = function(args){
     var paramsBet = {
         matchId:args.matchId,
@@ -142,7 +160,9 @@ handlers.addBet = function(args){
 
     var params = JSON.stringify(paramsBet);
 
-    var returnValue = http.request(baseURL+"bet/addBet", "post", params, "application/json");
+    // The calls to addBet origin is blocked, its gonna be reverted back to addBet once the function is updated
+    //var returnValue = http.request(baseURL+"bet/addBet", "post", params, "application/json");
+    var returnValue = http.request(baseURL+"bet/finalAddBet", "post", params, "application/json");
 
     if(returnValue!=""){
         //log.debug("the value are returned : "+returnValue);
@@ -150,6 +170,44 @@ handlers.addBet = function(args){
     }
 }
 
+
+// Added new handlers for canceling and deleteing bet
+handlers.cancelBet = function (args) {
+    var paramsBet = {
+        userId:currentPlayerId,
+        matchId: args.matchId
+    }
+
+    var params = JSON.stringify(paramsBet);
+
+    var returnValue = http.request(baseURL+"bet/cancelBet", "put", params, "application/json");
+
+    if(returnValue!=""){
+        //log.debug("the value are returned : "+returnValue);
+        return returnValue;
+    }
+}
+
+handlers.deleteBet = function (args) {
+    var paramsBet = {
+        userId:currentPlayerId,
+        matchId: args.matchId
+    }
+
+    var params = JSON.stringify(paramsBet);
+
+    var returnValue = http.request(baseURL+"bet/deleteBet", "delete", params, "application/json");
+
+    if(returnValue!=""){
+        //log.debug("the value are returned : "+returnValue);
+        return returnValue;
+    }
+}
+
+// END OF NEW HANDLERS OF BET
+
+
+// this is just an example of hot to call the outer server API
 handlers.executeCustom = function(args){
     var params = "matchId="+"1100";
     log.debug(params);

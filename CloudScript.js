@@ -140,8 +140,8 @@ handlers.getUserPointAndTicket = function () {
 
 // get all user's bet regardless of anything
 handlers.getBetOfUser = function () {
-    var getUrl = "bet/get/".currentUserId;
-    var returnValue = http.request(baseURL+getUrl);
+    var getUrl = baseURL+"bet/get/"+currentUserId;
+    var returnValue = http.request(getUrl);
     if(returnValue!="") {
         log.debug("the value are returned : " + returnValue);
         return returnValue;

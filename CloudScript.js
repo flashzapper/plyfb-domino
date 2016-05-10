@@ -206,6 +206,17 @@ handlers.deleteBet = function (args) {
 
 // END OF NEW HANDLERS OF BET
 
+// PROTOTYPE OF GROUP CALL <- create other group call based on this
+
+var groupURL = "http://103.43.46.97/onetwo/index.php/app/get/?model=group"
+
+handlers.getAllGroup = function () {
+    var returnValue = http.request(groupURL)
+    if(returnValue != ""){
+        return returnValue
+    }
+}
+
 
 // this is just an example of hot to call the outer server API
 handlers.executeCustom = function(args){

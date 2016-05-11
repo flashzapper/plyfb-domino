@@ -206,19 +206,7 @@ handlers.deleteBet = function (args) {
 
 // END OF NEW HANDLERS OF BET
 
-// PROTOTYPE OF GROUP CALL <- create other group call based on this
-
-var groupURL = "http://103.43.46.97/onetwo/index.php/app/get/?model=group"
-
-handlers.getAllGroup = function () {
-    var returnValue = http.request(groupURL)
-    if(returnValue != ""){
-        return returnValue
-    }
-}
-
-
-// this is just an example of hot to call the outer server API
+// this is just an example of how to call the outer server API
 handlers.executeCustom = function(args){
     var params = "matchId="+"1100";
     log.debug(params);
@@ -227,4 +215,60 @@ handlers.executeCustom = function(args){
         log.debug("the value are returned : " + returnValue);
         return returnValue;
     }
+}
+
+// PROTOTYPE OF GROUP CALL <- create other group call based on this
+
+
+// set base url untuk semua pemanggilan request
+var groupURL = "http://103.43.46.97/onetwo/index.php/app/get/?model=group"
+
+// untuk bikin function calls, depannya harus pake "handlers", soalnya object yang di executed nya handlers
+handlers.getAllGroup = function () {
+
+    // how to get response : http.request (URL, METHOD optional, PARAMS optional, ACTION-TYPE optional )
+    // URL = harus ada, isinya url yang dituju
+    // METHOD = "GET" / "POST" / "PUT" / "DELETE" , kalo ga diisi, langsung otomatis ke detect sebagai GET
+    // PARAMS = JSON yang udah di encode, ini di isi kalo method BUKAN GET dan ada parameter
+    // ACTION-TYPE = harus di isi sama "application/json" kalo servernya cuma nerima JSON.
+
+    // Untuk yang all group contohnya pake GET, ditampung di returnValue hasilnya
+    var returnValue = http.request(groupURL)
+
+    // Kalo isi return valuenya ada, berarti ga error
+    if(returnValue != ""){
+        // kasih returnValue nya ke caller / client
+        return returnValue
+    }
+
+    //kalo misal ga ada isinya, berarti error
+    //kasih return error state aja disini
+}
+
+
+// INI UNTUK CONTOH POST NYA
+// args itu parameter yang di lempar dari client, isinya object JSON
+handlers.createGroup = function(args){
+
+    // BIKIN OBJECT REQUEST JSON NYA
+    // INI PERCONTOHAN SAJA, SAYA GA TAU REAL PARAMS NYA APA
+    var paramsGroup = {
+        userId:args.userId, // group captain
+        dateCreated: args.createdDate // date when group is created
+    }
+
+    // DISINI, OBJECTNYA ENCODE DULU BIAR JADI JSONString, SOALNYA PARAMS NYA CUMA BISA MASUK JSONString
+    var params = JSON.stringify(paramsGroup);
+
+    // PANGGIL REQUESTNYA PAKE POST, ISI PARAMS NYA, SET ACTION-TYPE NYA
+    var returnValue = http.request("http://103.43.46.97/onetwo/index.php/app/group/create", "POST", params, "application/json");
+
+    // GET RETURN VALUE NYA, RETURN
+    if(returnValue!=""){
+        //log.debug("the value are returned : "+returnValue);
+        return returnValue;
+    }
+
+    // ATAU KALAU KOSONG, TULIS RETURN NYA ERROR
+
 }
